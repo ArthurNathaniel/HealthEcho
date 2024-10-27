@@ -36,7 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit a Suggestion - HealthEcho</title>
-    
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/suggestion.css">
     <!-- QuillJS Styles and Script -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -49,30 +50,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 </head>
 <body>
-    <h1>Submit Your Suggestion</h1>
+   <div class="suggestion_all">
+ <div class="forms">
+ <h1>Submit Your Suggestion</h1>
+ </div>
     <form action="suggestion.php" method="POST" onsubmit="copyQuillContent()">
-        <label for="name">Name (Optional):</label><br>
-        <input type="text" name="name" id="name" placeholder="Enter your name (optional)" /><br><br>
+       <div class="forms">
+       <label for="name">Name (Optional):</label>
+       <input type="text" name="name" id="name" placeholder="Enter your name (optional)" />
+       </div>
 
-        <label for="role">You are a:</label><br>
+       <div class="forms">
+       <label for="role">You are a:</label>
         <select name="role" id="role" required>
             <option value="" disabled selected>Select your role</option>
             <option value="staff">Staff</option>
             <option value="patient">Patient</option>
             <option value="anonymous">Anonymous</option>
-        </select><br><br>
+        </select>
+       </div>
 
-        <label for="suggestion">Your Suggestion:</label><br>
+      
 
-        <!-- Quill editor container -->
+        <div class="forms">
+        <label for="suggestion">Your Suggestion:</label>
+            <!-- Quill editor container -->
         <div id="editor-container" style="height: 200px;"></div>
         
         <!-- Hidden textarea to store Quill content -->
-        <textarea name="suggestion" id="suggestion" style="display:none;"></textarea><br><br>
+        <textarea name="suggestion" id="suggestion" style="display:none;"></textarea>
+        </div>
 
+        <div class="forms">
         <button type="submit">Submit Suggestion</button>
+        </div>
     </form>
 
+   </div>
     <!-- QuillJS Initialization -->
     <script>
         var quill = new Quill('#editor-container', {
@@ -81,4 +95,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 </body>
 </html>
-analytics.php

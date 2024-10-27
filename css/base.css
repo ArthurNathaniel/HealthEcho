@@ -14,3 +14,24 @@
     background-color: #F7F9FC;
     width: 100%;
   }
+
+  .forms{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  .forms input{
+    height: 45px;
+    width: 100%;
+  }
+  .forms select{
+    height: 45px;
+    width: 100%;
+  }
+.forms button{
+  height: 45px;
+  width: 100%;
+  background-color: #0e0995;
+  color: #FFF;
+  border: none;
+}

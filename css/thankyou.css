@@ -1,0 +1,11 @@
+.thank_you_all{
+    padding: 0 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.thank_you_all p{
+    margin-block: 20px;
+}
