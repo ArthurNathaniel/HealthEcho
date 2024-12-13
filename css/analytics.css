@@ -1,0 +1,30 @@
+.analytics_all{
+    padding: 0 10%;
+    margin-block: 50px;
+}
+
+.suggestion_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.suggestion_grid h3{
+    border: 2px dashed;
+    padding: 0 5%;
+    padding-block: 50px;
+    text-align: center;
+    margin-top: 30px;
+}
+    .chart_grid{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .chart{
+        width: 100%;
+        margin-top: 30px;
+        border: 2px dashed #0e0995;
+        padding: 20px;
+    }

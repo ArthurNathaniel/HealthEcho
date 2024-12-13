@@ -14,7 +14,7 @@
 
     <div class="healthecho_all">
         <h1>Welcome to HealthEcho</h1>
-        <p>Your suggestions matter! Help us improve by submitting your suggestions or viewing analytics.</p>
+        <p>Your suggestions matter! Help us improve by submitting your suggestions.</p>
 
         <div class="healtheccho_btn">
             <a href="suggestion.php">

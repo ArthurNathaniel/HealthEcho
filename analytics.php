@@ -10,7 +10,8 @@ if (!isset($_SESSION['admin_id'])) {
 // The rest of your code for the analytics or view suggestions page goes here.
 
 // Function to fetch suggestions count based on the date range
-function getSuggestionsCount($pdo, $startDate, $endDate) {
+function getSuggestionsCount($pdo, $startDate, $endDate)
+{
     $sql = "SELECT COUNT(*) FROM suggestions WHERE created_at BETWEEN :startDate AND :endDate";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':startDate', $startDate);
@@ -49,33 +50,60 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analytics - HealthEcho</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/analytics.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-    <h1>Suggestion Analytics</h1>
-    
-    <h2>Total Suggestions: <?php echo $totalSuggestions; ?></h2>
-    
-    <h3>This Week: <?php echo $weeklySuggestions; ?></h3>
-    <h3>This Month: <?php echo $monthlySuggestions; ?></h3>
-    <h3>This Year: <?php echo $yearlySuggestions; ?></h3>
+    <div class="logout">
+        <a href="logout.php">Logout</a>
+    </div>
+    <div class="analytics_all">
+        <div class="forms">
+            <h1>Suggestion Analytics</h1>
+            <p>Click here <a href="viewsuggestions.php">to view Suggestions</a></p>
+        </div>
 
-    <h2>Suggestions by Role</h2>
-    <ul>
-        <li>Staff: <?php echo isset($roleCounts['staff']) ? $roleCounts['staff'] : 0; ?></li>
-        <li>Patient: <?php echo isset($roleCounts['patient']) ? $roleCounts['patient'] : 0; ?></li>
-        <li>Anonymous: <?php echo isset($roleCounts['anonymous']) ? $roleCounts['anonymous'] : 0; ?></li>
-    </ul>
+        <div class="forms">
+            <h2>Total Suggestions: <?php echo $totalSuggestions; ?></h2>
+        </div>
+        <div class="suggestion_grid">
 
-    <!-- Chart for Total Suggestions -->
-    <canvas id="suggestionsChart" style="width:100%;max-width:600px"></canvas>
+            <h3>This Week: <br> <?php echo $weeklySuggestions; ?></h3>
+            <h3>This Month: <br> <?php echo $monthlySuggestions; ?></h3>
+            <h3>This Year: <br> <?php echo $yearlySuggestions; ?></h3>
+        </div>
 
-    <!-- Chart for Suggestions by Role -->
-    <canvas id="roleChart" style="width:100%;max-width:600px"></canvas>
+        <div class="forms">
+            <h2>Suggestions by Role</h2>
+        </div>
+
+        <div class="suggestion_grid">
+            <h3>Staff: <br> <?php echo isset($roleCounts['staff']) ? $roleCounts['staff'] : 0; ?></h3>
+            <h3>Patient: <br> <?php echo isset($roleCounts['patient']) ? $roleCounts['patient'] : 0; ?></h3>
+            <h3>Anonymous: <br> <?php echo isset($roleCounts['anonymous']) ? $roleCounts['anonymous'] : 0; ?></h3>
+        </div>
+
+        <div class="forms">
+            <h1>Suggestion Chart Analytics</h1>
+        </div>
+        <div class="chart_grid">
+            <div class="chart">
+                <!-- Chart for Total Suggestions -->
+                <canvas id="suggestionsChart" style="width:100%;max-width:600px"></canvas>
+            </div>
+            <div class="chart">
+                <!-- Chart for Suggestions by Role -->
+                <canvas id="roleChart" style="width:100%;max-width:600px"></canvas>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Data for total suggestions chart
@@ -84,22 +112,21 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             datasets: [{
                 label: 'Number of Suggestions',
                 data: [<?php echo $totalSuggestions; ?>, <?php echo $weeklySuggestions; ?>, <?php echo $monthlySuggestions; ?>, <?php echo $yearlySuggestions; ?>],
-                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 99, 132, 0.2)'],
-                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 99, 132, 1)'],
-                borderWidth: 1
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)'
+                ],
             }]
         };
 
         const suggestionsChartConfig = {
-            type: 'bar',
+            type: 'pie',
             data: totalSuggestionsData,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+
         };
 
         // Create total suggestions chart
@@ -118,18 +145,21 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     <?php echo isset($roleCounts['patient']) ? $roleCounts['patient'] : 0; ?>,
                     <?php echo isset($roleCounts['anonymous']) ? $roleCounts['anonymous'] : 0; ?>
                 ],
-                backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(75, 192, 192, 0.2)'],
-                borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 159, 64, 1)', 'rgba(75, 192, 192, 1)'],
-                borderWidth: 1
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)'
+                ],
             }]
         };
 
         const roleChartConfig = {
-            type: 'bar',
+            type: 'pie',
             data: roleChartData,
-            options: {
-                responsive: true,
-            }
+
         };
 
         // Create role chart
@@ -139,4 +169,5 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         );
     </script>
 </body>
+
 </html>

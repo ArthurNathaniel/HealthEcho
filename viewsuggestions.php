@@ -21,6 +21,7 @@ $suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Suggestions - HealthEcho</title>
+    <link rel="stylesheet" href="./css/base.css">
     <style>
         table {
             width: 100%;
@@ -33,38 +34,53 @@ $suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
             padding: 10px;
             text-align: left;
         }
+        th{
+            background-color: #0e0995;
+            color: #FFF;
+        }
+
+        .view{
+            padding: 0 10%;
+            margin-block: 50px;
+        }
     </style>
 </head>
 <body>
+<div class="logout">
+        <a href="logout.php">Logout</a>
+    </div>
+    <div class="view">
     <h1>Submitted Suggestions</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Suggestion</th>
-                <th>Date Submitted</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (count($suggestions) > 0): ?>
-                <?php foreach ($suggestions as $suggestion): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($suggestion['id']); ?></td>
-                        <td><?php echo htmlspecialchars($suggestion['name']); ?></td>
-                        <td><?php echo htmlspecialchars($suggestion['role']); ?></td>
-                        <td><?php echo nl2br(htmlspecialchars($suggestion['suggestion'])); ?></td>
-                        <td><?php echo date('Y-m-d h:i A', strtotime($suggestion['created_at'])); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+    <p>Click here <a href="analytics.php">Analytics</a></p>
+<br>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Suggestion</th>
+            <th>Date Submitted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (count($suggestions) > 0): ?>
+            <?php foreach ($suggestions as $suggestion): ?>
                 <tr>
-                    <td colspan="5">No suggestions have been submitted yet.</td>
+                    <td><?php echo htmlspecialchars($suggestion['id']); ?></td>
+                    <td><?php echo htmlspecialchars($suggestion['name']); ?></td>
+                    <td><?php echo htmlspecialchars($suggestion['role']); ?></td>
+                    <td><?php echo nl2br(htmlspecialchars($suggestion['suggestion'])); ?></td>
+                    <td><?php echo date('Y-m-d h:i A', strtotime($suggestion['created_at'])); ?></td>
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="5">No suggestions have been submitted yet.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+    </div>
 </body>
 </html>

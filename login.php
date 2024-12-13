@@ -57,6 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        <button type="submit">Login</button>
        </div>
     </form>
+
+    <div class="forms">
+    <p>Make a suggestion <a href="suggestion.php">click here</a></p>
+    </div>
  </div>
   
 </body>

@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <div class="suggestion_all">
  <div class="forms">
  <h1>Submit Your Suggestion</h1>
+ 
  </div>
     <form action="suggestion.php" method="POST" onsubmit="copyQuillContent()">
        <div class="forms">
